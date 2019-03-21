@@ -1,0 +1,33 @@
+.search {
+  padding-left: 30px !important;
+}
+
+.fa-search {
+  position: relative;
+  right: -25px;
+}
+
+.create-new {
+  line-height: 1.2 !important;
+  background-color: rgb(48, 165, 74) !important;
+  color: white !important;
+  border-color: #ced4da !important;
+  cursor: pointer;
+}
+
+.location {
+  border: 1px solid transparent !important;
+  padding-left: 5px !important;
+}
+
+.event-form {
+  border: none !important;
+}
+
+.add {
+  margin-top: 2rem;
+}
+
+.event-list {
+  padding: 20px;
+}

@@ -1,0 +1,21 @@
+.login-form {
+}
+
+.big-icon {
+  font-size: 5rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-icon {
+}
+
+.login-form input[type='username'] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.login-form input[type='password'] {
+  margin-bottom: 2rem;
+}

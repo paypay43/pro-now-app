@@ -1,0 +1,45 @@
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: #4a5e83;
+  border-bottom: 1px solid #222b3c;
+}
+
+.site-header {
+}
+
+.navbar-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  font-size: 1.5rem;
+  height: 50px;
+}
+
+.navbar-flex h3 {
+  margin-right: auto;
+  text-decoration: none;
+  color: #ebebeb;
+}
+
+.navbar-flex a {
+  text-decoration: none;
+  color: white;
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.navbar-flex ul {
+  list-style-type: none;
+}
+.navbar-flex ul li {
+  margin: 0 1rem;
+  display: inline;
+}
+
+.navbar-flex ul li a:hover {
+  color: #c1c1c1;
+}

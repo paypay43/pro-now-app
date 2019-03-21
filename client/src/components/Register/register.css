@@ -1,0 +1,7 @@
+.register-form label {
+  float: left;
+}
+
+.register-form input[type='email'] {
+  margin-bottom: 2rem;
+}
