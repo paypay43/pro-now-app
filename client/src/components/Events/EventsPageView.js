@@ -34,6 +34,28 @@ export default function EventsPageView(props) {
     props.createEvent();
   };
 
+  const changeView = () => {
+    setView('list');
+  };
+
+  const renderButton = () => {
+    if (view === 'list')
+      return (
+        <button
+          onClick={createEventAction}
+          className="btn form-control create-new"
+        >
+          Create Event
+        </button>
+      );
+    else
+      return (
+        <button onClick={changeView} className="btn form-control go-back">
+          Go Back
+        </button>
+      );
+  };
+
   return (
     <div>
       <h2 className="center">Events</h2>
@@ -48,15 +70,10 @@ export default function EventsPageView(props) {
             type="search"
           />
           <span className="form-control center location">Washington D.C.</span>
-          <button
-            onClick={createEventAction}
-            className="btn form-control create-new"
-          >
-            Create Event
-          </button>
+          {renderButton()}
         </div>
         {(view === 'list' && <EventList />) || (
-          <EventForm create={props.createEvent} />
+          <EventForm changeView={changeView} create={props.createEvent} />
         )}
       </section>
     </div>

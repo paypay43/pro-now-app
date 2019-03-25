@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AuthApiService from '../../services/auth-api-service';
 import EventApiService from '../../services/event-api-service';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './event.css';
 
 export default function EventForm(props) {
   const [error, setError] = useState(null);
+  const [date, setDate] = useState(null);
 
   /*const handleSubmitJwtAuth = ev => {
     ev.preventDefault();
@@ -45,9 +48,14 @@ export default function EventForm(props) {
     });
   };
 
+  const changeView = () => {
+    props.changeView();
+  };
+
   return (
     <form onSubmit={submitForm} className="event-form app-form">
       <h1>Create Event</h1>
+      <button onClick={changeView}>Go Back</button>
       <div role="alert">{error && <p className="red">{displayError()}</p>}</div>
       <label className="label-control" htmlFor="event_name">
         Event Name
@@ -81,7 +89,7 @@ export default function EventForm(props) {
       <label className="label-control" htmlFor="date">
         Date/Time
       </label>
-      <input name="date" type="text" className="form-control" required />
+      <DatePicker selected={date} onChange={setDate} />
       <button className="btn add" type="submit">
         Add
       </button>

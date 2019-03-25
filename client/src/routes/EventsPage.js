@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import EventsPageView from '../components/Events/EventsPageView.js';
 import EventContext from '../contexts/EventContext';
 import EventApiService from '../services/event-api-service';
@@ -15,14 +16,12 @@ export default function EventsPage(props) {
         setEvents(events);
       })
       .catch(eventContext.setError);
-  });
-
-  const redirectEvent = id => {};
+  }, []);
 
   return (
     <section className="page container EventsPage">
       <div className="page-section">
-        <EventsPageView createEvent={redirectEvent} />
+        <EventsPageView />
       </div>
     </section>
   );

@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function EventItem(props) {
   const { event } = props;
-  debugger;
-  console.log(event);
   return (
     <Link to={`/event/${event.id}`} className="EventListItem">
       <header className="EventListItem__header">

@@ -44,72 +44,43 @@ eventsRouter
   .get((req, res) => {
     res.json(EventsService.serializeEvent(res.event));
   });
-eventsRouter
-  .route('/:id/comments')
-  .all(requireAuth)
-  .all(checkEventExists)
-  .get((req, res, next) => {
-    EventsService.getEventComments(req.app.get('db'), req.params.id)
-      .then(comments => {
-        res.json(comments.map(EventsService.serializeEventComment));
-      })
-      .catch(next);
-  })
-  .post(jsonBodyParser, (req, res, next) => {
-    const { text } = req.body;
-    const newComment = { text, event_id: res.event.id, user_id: req.user.id };
-    for (const field of ['text'])
-      if (!req.body[field]) {
-        return res.status(400).json({
-          error: `Missing '${field}' in request body`
-        });
-      }
-
-    EventsService.insertEventComment(req.app.get('db'), newComment)
-      .then(comment => {
-        return (
-          res
-            .status(201)
-            //.location(path.posix.join(req.originalUrl, `/${event.id}`))
-            .json(EventsService.serializeEventComment(comment))
-        );
-      })
-      .catch(next);
-  });
 
 eventsRouter
   .route('/:id/subscribe')
   .all(requireAuth)
   .all(checkEventExists)
-  .get((req, res, next) => {
-    EventsService.getEventSubscriptions(req.app.get('db'), res.event.id)
-      .then(subs => res.json(subs))
-      .catch(next);
-  })
-  .post(async (req, res, next) => {
-    const newSub = {};
+  .post((req, res, next) => {
+    console.log('hi');
+    const status = checkEventSubscriptionExists(req, res, next);
 
-    newSub.user_id = req.user.id;
-    newSub.event_id = res.event.id;
-
-    const status = await checkEventSubscriptionExists(req, res, next);
-    console.log(status);
+    const eventSub = {
+      user_id: req.user.id,
+      event_id: res.event.id
+    };
 
     if (status === null) {
-      newSub.status = 'ATTENDING';
-      EventsService.subscribeEvent(req.app.get('db'), newSub).then(sub => {
-        res.status(200).json({
-          status: newSub.status
-        });
-      });
+      eventSub.status = 'ATTENDING';
+      EventsService.subscribeEvent(req.app.get('db'), eventSub)
+        .then(sub => {
+          res.json(eventSub.status);
+        })
+        .catch(next);
     } else {
-      newSub.status = status === 'ATTENDING' ? 'UNATTENDING' : 'ATTENDING';
-
-      EventsService.updateSubscription(req.app.get('db'), newSub).then(() => {
-        res.status(200).json({
-          status: newSub.status
-        });
-      });
+      if (status === 'ATTENDING') {
+        eventSub.status = 'UNATTENDING';
+        EventsService.updateSubscription(req.app.get('db', eventSub))
+          .then(sub => {
+            res.json(eventSub.status);
+          })
+          .catch(next);
+      } else {
+        eventSub.status = 'ATTENDING';
+        EventsService.updateSubscription(req.app.get('db', eventSub))
+          .then(sub => {
+            res.json(eventSub.status);
+          })
+          .catch(next);
+      }
     }
   });
 
@@ -125,7 +96,6 @@ async function checkEventExists(req, res, next) {
     res.event = event;
     next();
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }

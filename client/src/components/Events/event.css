@@ -15,6 +15,14 @@
   cursor: pointer;
 }
 
+.go-back {
+  line-height: 1.2 !important;
+  background-color: rgb(165, 62, 48) !important;
+  color: white !important;
+  border-color: #ced4da !important;
+  cursor: pointer;
+}
+
 .location {
   border: 1px solid transparent !important;
   padding-left: 5px !important;

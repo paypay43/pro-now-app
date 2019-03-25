@@ -16,9 +16,8 @@ export default function EventList(props) {
   };*/
 
   const renderEvents = events => {
-    debugger;
     return events.map(event => {
-      return <EventItem event={event} />;
+      return <EventItem key={event.id} event={event} />;
     });
   };
 
@@ -29,8 +28,6 @@ export default function EventList(props) {
   return (
     <EventContext.Consumer>
       {value => {
-        console.log(value);
-        debugger;
         return (
           <div className="event-list">
             {(value.events.length !== 0 && renderEvents(value.events)) ||

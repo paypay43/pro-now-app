@@ -42,7 +42,6 @@ export default function Header(props) {
   return (
     <UserContext.Consumer>
       {value => {
-        console.log(value);
         return (
           <nav className="sticky-top">
             <div class="navbar-flex">
