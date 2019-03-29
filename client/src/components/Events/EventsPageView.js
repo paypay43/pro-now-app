@@ -10,6 +10,7 @@ import EventForm from './EventForm';
 export default function EventsPageView(props) {
   const [error, setError] = useState(null);
   const [view, setView] = useState('list');
+  const [query, setQuery] = useState('');
 
   /*const handleSubmitJwtAuth = ev => {
     ev.preventDefault();
@@ -30,10 +31,6 @@ export default function EventsPageView(props) {
     setView('form');
   };
 
-  const successCreate = () => {
-    props.createEvent();
-  };
-
   const changeView = () => {
     setView('list');
   };
@@ -43,22 +40,26 @@ export default function EventsPageView(props) {
       return (
         <button
           onClick={createEventAction}
-          className="btn form-control create-new"
+          className="btn form-control right create-new"
         >
           Create Event
         </button>
       );
     else
       return (
-        <button onClick={changeView} className="btn form-control go-back">
+        <button onClick={changeView} className="btn form-control right go-back">
           Go Back
         </button>
       );
   };
 
+  const createEvent = id => {
+    props.createEvent(id);
+  };
+
   return (
     <div>
-      <h2 className="center">Events</h2>
+      <h1 className="center">Events</h1>
       <section className="events-main">
         <div className="filter-options">
           <span>
@@ -69,11 +70,11 @@ export default function EventsPageView(props) {
             placeholder="Search"
             type="search"
           />
-          <span className="form-control center location">Washington D.C.</span>
+
           {renderButton()}
         </div>
         {(view === 'list' && <EventList />) || (
-          <EventForm changeView={changeView} create={props.createEvent} />
+          <EventForm changeView={changeView} create={createEvent} />
         )}
       </section>
     </div>

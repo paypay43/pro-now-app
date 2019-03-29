@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AuthApiService from '../../services/auth-api-service';
 import EventApiService from '../../services/event-api-service';
+import EventLocationInput from './EventLocationInput';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './event.css';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from 'react-places-autocomplete';
 
 export default function EventForm(props) {
   const [error, setError] = useState(null);
   const [date, setDate] = useState(null);
+  const [place, setPlace] = useState('');
 
   /*const handleSubmitJwtAuth = ev => {
     ev.preventDefault();
@@ -18,19 +24,17 @@ export default function EventForm(props) {
   const submitForm = e => {
     e.preventDefault();
     setError(null);
-    const { event_name, location, description, date } = e.target;
+    const { event_name, description } = e.target;
 
     EventApiService.postEvent({
       event_name: event_name.value,
-      location: location.value,
+      location: place,
       description: description.value,
-      date: date.value
+      date: date
     })
       .then(event => {
         event_name.value = '';
-        location.value = '';
         description.value = '';
-        date.value = '';
         props.create(event.id);
       })
       .catch(res => {
@@ -52,10 +56,13 @@ export default function EventForm(props) {
     props.changeView();
   };
 
+  const changeLocation = value => {
+    setPlace(value);
+  };
+
   return (
     <form onSubmit={submitForm} className="event-form app-form">
-      <h1>Create Event</h1>
-      <button onClick={changeView}>Go Back</button>
+      <h2>Create Event</h2>
       <div role="alert">{error && <p className="red">{displayError()}</p>}</div>
       <label className="label-control" htmlFor="event_name">
         Event Name
@@ -70,13 +77,7 @@ export default function EventForm(props) {
       <label className="label-control" htmlFor="location">
         Location
       </label>
-      <input
-        name="location"
-        type="location"
-        id="inputlocation"
-        className="form-control"
-        required
-      />
+      <EventLocationInput setAddress={changeLocation} />
       <label className="label-control" htmlFor="decsription">
         Description
       </label>
@@ -89,7 +90,7 @@ export default function EventForm(props) {
       <label className="label-control" htmlFor="date">
         Date/Time
       </label>
-      <DatePicker selected={date} onChange={setDate} />
+      <DatePicker selected={date} onChange={value => setDate(value)} />
       <button className="btn add" type="submit">
         Add
       </button>

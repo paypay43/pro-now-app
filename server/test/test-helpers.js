@@ -5,38 +5,35 @@ function makeUsersArray() {
     {
       id: 1,
       username: 'test-user-1',
-      full_name: 'Test user 1',
-      nickname: 'TU1',
+      email: 'pay@test.com',
       password: 'password',
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
       id: 2,
       username: 'test-user-2',
-      full_name: 'Test user 2',
-      nickname: 'TU2',
+      email: 'pay@test.com',
       password: 'password',
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
       id: 3,
       username: 'test-user-3',
-      full_name: 'Test user 3',
-      nickname: 'TU3',
+      email: 'pay@test.com',
       password: 'password',
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
       id: 4,
       username: 'test-user-4',
-      full_name: 'Test user 4',
-      nickname: 'TU4',
+      email: 'pay@test.com'
       password: 'password',
       date_created: '2029-01-22T16:28:32.615Z',
     },
   ]
 }
 
+/*
 function makeThingsArray(users) {
   return [
     {
@@ -213,21 +210,19 @@ function makeMaliciousThing(user) {
     maliciousThing,
     expectedThing,
   }
-}
+}*/
 
 function makeThingsFixtures() {
   const testUsers = makeUsersArray()
-  const testThings = makeThingsArray(testUsers)
-  const testReviews = makeReviewsArray(testUsers, testThings)
-  return { testUsers, testThings, testReviews }
+
+  return { testUsers }
 }
 
 function cleanTables(db) {
   return db.raw(
     `TRUNCATE
-      boiler_things,
-      boiler_users,
-      boiler_reviews
+     users,
+      events,
       RESTART IDENTITY CASCADE`
   )
 }
@@ -238,11 +233,11 @@ function seedUsers(db, users){
     password: bcrypt.hashSync(user.password, 1)
   }))
   return db
-    .into('boiler_users')
+    .into('users')
     .insert(preppedUsers);
 }
 
-function seedThingsTables(db, users, things, reviews=[]) {
+/*function seedThingsTables(db, users, things, reviews=[]) {
   return seedUsers(db, users)
     .then(() =>
       db
@@ -261,7 +256,7 @@ function seedMaliciousThing(db, user, thing) {
         .into('boiler_things')
         .insert([thing])
     )
-}
+}*/
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET){
   const token = jwt.sign({user_id: user.id}, secret, {

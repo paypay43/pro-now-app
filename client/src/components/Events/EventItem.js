@@ -7,22 +7,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function EventItem(props) {
   const { event } = props;
+
   return (
-    <Link to={`/event/${event.id}`} className="EventListItem">
-      <header className="EventListItem__header">
-        <h2 className="EventListItem__heading">{event.event_name}</h2>
-      </header>
-      <section className="event-main-info">
-        <div>Description: {event.description}</div>
-        <div>Location: {event.location}</div>
-        <div>Created by: {event.user.username}</div>
-        Created:{' '}
-        <Moment fromNow ago>
-          {event.date_created}
-        </Moment>
-      </section>
-      <footer className="EventListItem__footer" />
-    </Link>
+    <li className="event-list-item">
+      <Link to={`/event/${event.id}`} className="">
+        <header className="EventListItem__header">
+          <h2 className="EventListItem__heading">{event.event_name}</h2>
+        </header>
+        <section className="event-main-info">
+          <div>
+            <b>Description:</b> {event.description}
+          </div>
+          <div>
+            <b>Location:</b> {event.location}
+          </div>
+          <div>
+            <b>Created by:</b> {event.user.username}
+          </div>
+          <div>
+            <b>Date:</b> <Moment format="YYYY/MM/DD">{event.date}</Moment>
+          </div>
+        </section>
+        <footer className="EventListItem__footer">
+          <b>Created:</b>{' '}
+          <Moment fromNow ago>
+            {event.date_created}
+          </Moment>{' '}
+          ago
+        </footer>
+      </Link>
+    </li>
   );
 }
 

@@ -50,7 +50,6 @@ eventsRouter
   .all(requireAuth)
   .all(checkEventExists)
   .post((req, res, next) => {
-    console.log('hi');
     const status = checkEventSubscriptionExists(req, res, next);
 
     const eventSub = {

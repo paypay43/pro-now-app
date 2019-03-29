@@ -44,7 +44,7 @@ export default function Header(props) {
       {value => {
         return (
           <nav className="sticky-top">
-            <div class="navbar-flex">
+            <div className="navbar-flex">
               <h3>
                 <FontAwesomeIcon className="black" icon="fist-raised" />
                 <Link to="/">ProtestNow</Link>

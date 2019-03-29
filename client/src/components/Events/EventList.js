@@ -22,17 +22,17 @@ export default function EventList(props) {
   };
 
   const renderEmpty = () => {
-    return <h1>No Events Found</h1>;
+    return <h2>No Events Found</h2>;
   };
 
   return (
     <EventContext.Consumer>
       {value => {
         return (
-          <div className="event-list">
+          <ul className="event-list">
             {(value.events.length !== 0 && renderEvents(value.events)) ||
               renderEmpty()}
-          </div>
+          </ul>
         );
       }}
     </EventContext.Consumer>

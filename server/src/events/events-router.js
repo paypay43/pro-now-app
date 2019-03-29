@@ -93,7 +93,6 @@ eventsRouter
     newSub.event_id = res.event.id;
 
     const status = await checkEventSubscriptionExists(req, res, next);
-    console.log(status);
 
     if (status === null) {
       newSub.status = 'ATTENDING';
@@ -125,7 +124,6 @@ async function checkEventExists(req, res, next) {
     res.event = event;
     next();
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }

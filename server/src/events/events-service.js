@@ -86,7 +86,6 @@ const EventsService = {
   },
 
   updateSubscription(db, sub) {
-    console.log('is this working');
     return db
       .from('event_subscriptions AS sub')
       .where('sub.event_id', sub.event_id)

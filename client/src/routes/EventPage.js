@@ -26,7 +26,6 @@ export default function EventPage(props) {
         ]);
       })
       .then(data => {
-        debugger;
         user = TokenService.readJwtToken();
         let attend = false;
         let subs = data[0];
@@ -58,13 +57,13 @@ export default function EventPage(props) {
   const generateSubButton = () => {
     if (isAttending) {
       return (
-        <button className="go-back" onClick={subscribeEvent}>
+        <button className="btn go-back" onClick={subscribeEvent}>
           Unsubscribe
         </button>
       );
     } else {
       return (
-        <button className="attend-new" onClick={subscribeEvent}>
+        <button className="btn attend-new" onClick={subscribeEvent}>
           Attend Event
         </button>
       );
@@ -72,15 +71,16 @@ export default function EventPage(props) {
   };
 
   const addComment = comment => {
-    debugger;
     let newComments = [comment, ...comments];
     setComments(newComments);
   };
 
   return (
     <section className="page container EventPage">
-      <Link to="/">Go Back</Link>
       <div className="page-section">
+        <button className="event-view-btn btn">
+          <Link to="/">Go Back</Link>
+        </button>
         {(event !== null && <EventItem event={event} />) || (
           <div>No Event Found</div>
         )}
@@ -107,7 +107,7 @@ function EventComments({ comments = [] }) {
             />
             {comment.text}
           </p>
-          <p className="EventPage__comment-user">{comment.user.full_name}</p>
+          <p className="EventPage__comment-user">{comment.user.username}</p>
         </li>
       ))}
     </ul>

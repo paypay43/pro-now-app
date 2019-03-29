@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventForm component renders loginform 1`] = `
+<form
+  className="event-form app-form"
+  onSubmit={[Function]}
+>
+  <h2>
+    Create Event
+  </h2>
+  <div
+    role="alert"
+  />
+  <label
+    className="label-control"
+    htmlFor="event_name"
+  >
+    Event Name
+  </label>
+  <input
+    autoFocus=""
+    className="form-control"
+    name="event_name"
+    required={true}
+    type="text"
+  />
+  <label
+    className="label-control"
+    htmlFor="location"
+  >
+    Location
+  </label>
+  <EventLocationInput
+    setAddress={[Function]}
+  />
+  <label
+    className="label-control"
+    htmlFor="decsription"
+  >
+    Description
+  </label>
+  <textarea
+    className="form-control"
+    name="description"
+    required={true}
+    type="text"
+  />
+  <label
+    className="label-control"
+    htmlFor="date"
+  >
+    Date/Time
+  </label>
+  <DatePicker
+    allowSameDay={false}
+    dateFormat="MM/dd/yyyy"
+    dateFormatCalendar="LLLL yyyy"
+    disabled={false}
+    disabledKeyboardNavigation={false}
+    dropdownMode="scroll"
+    inlineFocusSelectedMonth={false}
+    monthsShown={1}
+    nextMonthButtonLabel="Next month"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClickOutside={[Function]}
+    onFocus={[Function]}
+    onInputClick={[Function]}
+    onInputError={[Function]}
+    onKeyDown={[Function]}
+    onMonthChange={[Function]}
+    onSelect={[Function]}
+    onYearChange={[Function]}
+    preventOpenOnFocus={false}
+    previousMonthButtonLabel="Previous Month"
+    readOnly={false}
+    renderDayContents={[Function]}
+    selected={null}
+    shouldCloseOnSelect={true}
+    showTimeInput={false}
+    showTimeSelect={false}
+    strictParsing={false}
+    timeCaption="Time"
+    timeInputLabel="Time"
+    timeIntervals={30}
+    withPortal={false}
+  />
+  <button
+    className="btn add"
+    type="submit"
+  >
+    Add
+  </button>
+</form>
+`;

@@ -9,6 +9,15 @@ export default function EventsPage(props) {
   const eventContext = React.useContext(EventContext);
   const [events, setEvents] = useState(eventContext.events);
 
+  const history = {
+    push: () => {}
+  };
+
+  const handleEventSuccess = id => {
+    const { history } = props;
+    history.push('/event/' + id);
+  };
+
   useEffect(() => {
     EventApiService.getEvents()
       .then(events => {
@@ -21,7 +30,7 @@ export default function EventsPage(props) {
   return (
     <section className="page container EventsPage">
       <div className="page-section">
-        <EventsPageView />
+        <EventsPageView createEvent={handleEventSuccess} />
       </div>
     </section>
   );
